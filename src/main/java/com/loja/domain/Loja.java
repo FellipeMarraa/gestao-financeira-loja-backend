@@ -1,16 +1,30 @@
 package com.loja.domain;
 
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "LOJA")
+
 public class Loja implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
    private int id;
    private String nome;
    private String endereco;
    private String cnpj;
-   private List<Venda>vendas;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "loja",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+   private List<Venda> vendas = new ArrayList<>();
 
     public Loja() {
     }

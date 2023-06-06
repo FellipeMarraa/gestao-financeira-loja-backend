@@ -2,11 +2,17 @@ package com.loja.domain;
 
 import com.loja.domain.enums.TipoDespesaEnum;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class Despesa {
+@Entity
+@Table(name = "DESPESA")
+public class Despesa implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private Date data;
     private float valor;

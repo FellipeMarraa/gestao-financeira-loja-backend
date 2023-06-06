@@ -1,14 +1,23 @@
 package com.loja.domain;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
+@Table(name = "VENDA")
 public class Venda implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private Date data;
     private float total;
+
+    @ManyToOne
+    @JoinColumn(name = "loja")
+    private Loja loja;
 
     public Venda() {
     }
