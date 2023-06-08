@@ -1,9 +1,11 @@
 package com.loja.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.loja.domain.enums.TipoDespesaEnum;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,15 +16,19 @@ public class Despesa implements Serializable {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
-    private Date data;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate data;
     private float valor;
     private String descricao;
+
+    @Enumerated(EnumType.STRING)
     private TipoDespesaEnum tipo;
 
     public Despesa() {
     }
 
-    public Despesa(int id, Date data, float valor, String descricao, TipoDespesaEnum tipo) {
+    public Despesa(int id, LocalDate data, float valor, String descricao, TipoDespesaEnum tipo) {
         this.id = id;
         this.data = data;
         this.valor = valor;
@@ -38,11 +44,11 @@ public class Despesa implements Serializable {
         this.id = id;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
         return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
         this.data = data;
     }
 
